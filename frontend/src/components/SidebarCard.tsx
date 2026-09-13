@@ -1,7 +1,7 @@
 import { useStore } from '../state/store';
-import { CloudIcon, HomeIcon } from './icons';
+import { CloseIcon, CloudIcon, HomeIcon } from './icons';
 import { formatTemperature, formatTime } from './format';
-import type { KeyboardEvent } from 'react';
+import type { KeyboardEvent, MouseEvent } from 'react';
 import type { Location } from '../types';
 
 interface SidebarCardProps {
@@ -10,7 +10,7 @@ interface SidebarCardProps {
 }
 
 export function SidebarCard({ location, isHome }: SidebarCardProps) {
-  const { selectedId, select } = useStore();
+  const { selectedId, select, remove } = useStore();
   const isSelected = selectedId === location.id;
   const observed = formatTime(location.weather.observed_at);
   const area =
@@ -28,6 +28,10 @@ export function SidebarCard({ location, isHome }: SidebarCardProps) {
       onSelect();
     }
   };
+  const onDelete = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    void remove(location.id);
+  };
   return (
     <div
       role="button"
@@ -41,6 +45,14 @@ export function SidebarCard({ location, isHome }: SidebarCardProps) {
           : 'border-white/10 bg-white/[0.07] hover:bg-white/[0.12]'
       }`}
     >
+      <button
+        type="button"
+        onClick={onDelete}
+        aria-label={`Remove ${area}`}
+        className="absolute right-2 top-2 z-10 flex h-5 w-5 items-center justify-center rounded-full text-white/50 transition hover:bg-white/20 hover:text-white"
+      >
+        <CloseIcon className="h-3 w-3" />
+      </button>
       <div className="flex items-start justify-between gap-3 px-4 pt-3">
         <div className="min-w-0">
           <div className="truncate text-lg font-semibold leading-tight text-white">{area}</div>
@@ -59,7 +71,7 @@ export function SidebarCard({ location, isHome }: SidebarCardProps) {
             )}
           </div>
         </div>
-        <div className="text-3xl font-light tabular-nums text-white/90">{temperature}</div>
+        <div className="pr-5 text-3xl font-light tabular-nums text-white/90">{temperature}</div>
       </div>
       <div className="mt-3 flex items-center justify-between border-t border-white/10 px-4 py-2 text-xs">
         <div className="flex items-center gap-2 text-white/80">
