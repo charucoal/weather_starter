@@ -39,46 +39,50 @@ export function SidebarCard({ location, isHome }: SidebarCardProps) {
       onClick={onSelect}
       onKeyDown={onKeyDown}
       aria-pressed={isSelected}
-      className={`relative w-full cursor-pointer overflow-hidden rounded-2xl border text-left backdrop-blur-xl transition ${
+      className={`relative w-full cursor-pointer overflow-hidden rounded-[var(--radius-card)] border text-left shadow-[var(--card-shadow)] backdrop-blur-[var(--surface-blur)] transition ${
         isSelected
-          ? 'border-white/30 bg-white/20 shadow-lg shadow-black/20'
-          : 'border-white/10 bg-white/[0.07] hover:bg-white/[0.12]'
+          ? 'border-[var(--location-card-selected-border)] bg-[var(--location-card-selected-bg)] shadow-[var(--location-card-shadow-selected)]'
+          : 'border-[var(--location-card-border)] bg-[var(--location-card-bg)] hover:bg-[var(--location-card-bg-hover)]'
       }`}
     >
       <button
         type="button"
         onClick={onDelete}
         aria-label={`Remove ${area}`}
-        className="absolute right-2 top-2 z-10 flex h-5 w-5 items-center justify-center rounded-full text-white/50 transition hover:bg-white/20 hover:text-white"
+        className="absolute right-2 top-2 z-10 flex h-5 w-5 items-center justify-center rounded-full text-[var(--text-faint)] transition hover:bg-[var(--surface-border)] hover:text-[var(--text-primary)]"
       >
         <CloseIcon className="h-3 w-3" />
       </button>
       <div className="flex items-start justify-between gap-3 px-4 pt-3">
         <div className="min-w-0">
-          <div className="truncate text-lg font-semibold leading-tight text-white">{area}</div>
-          <div className="mt-0.5 flex items-center gap-1.5 text-[11px] text-white/70">
+          <div className="truncate text-lg font-semibold leading-tight text-[var(--text-primary)]">
+            {area}
+          </div>
+          <div className="mt-0.5 flex items-center gap-1.5 text-[11px] text-[var(--text-tertiary)]">
             {isHome ? (
               <>
                 <span>My Location</span>
-                <span className="text-white/40">·</span>
+                <span className="text-[var(--text-faint)]">·</span>
                 <HomeIcon className="h-3 w-3" />
                 <span>Home</span>
               </>
             ) : observed ? (
               <span>{observed}</span>
             ) : (
-              <span className="text-white/50">Not refreshed</span>
+              <span className="text-[var(--text-faint)]">Not refreshed</span>
             )}
           </div>
         </div>
-        <div className="pr-5 text-3xl font-light tabular-nums text-white/90">{temperature}</div>
+        <div className="pr-5 text-3xl font-light tabular-nums text-[var(--text-secondary)]">
+          {temperature}
+        </div>
       </div>
-      <div className="mt-3 flex items-center justify-between border-t border-white/10 px-4 py-2 text-xs">
-        <div className="flex items-center gap-2 text-white/80">
-          <CloudIcon className="h-4 w-4 text-white/70" />
+      <div className="mt-3 flex items-center justify-between border-t border-[var(--divider)] px-4 py-2 text-xs">
+        <div className="flex items-center gap-2 text-[var(--text-secondary)]">
+          <CloudIcon className="h-4 w-4 text-[var(--text-tertiary)]" />
           <span>{condition}</span>
         </div>
-        <div className="text-white/60 tabular-nums">
+        <div className="text-[var(--text-tertiary)] tabular-nums">
           H:{high} L:{low}
         </div>
       </div>

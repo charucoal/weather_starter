@@ -14,11 +14,11 @@ function shortenLabel(label: string): string {
 export function HourlyStrip({ periods = [] }: HourlyStripProps) {
   if (periods.length === 0) {
     return (
-      <section className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-xl">
-        <p className="border-b border-white/10 px-4 py-2 text-[12px] text-white/85">
+      <section className="rounded-[var(--radius-card)] border border-[var(--surface-border)] bg-[var(--surface-bg)] shadow-[var(--card-shadow)] backdrop-blur-[var(--surface-blur)]">
+        <p className="border-b border-[var(--divider)] px-4 py-2 text-[12px] text-[var(--text-secondary)]">
           Forecast unavailable from this data source.
         </p>
-        <div className="flex min-h-[5rem] items-center justify-center text-sm text-white/55">
+        <div className="flex min-h-[5rem] items-center justify-center text-sm text-[var(--text-faint)]">
           --
         </div>
       </section>
@@ -32,25 +32,27 @@ export function HourlyStrip({ periods = [] }: HourlyStripProps) {
   }));
 
   return (
-    <section className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-xl">
-      <p className="border-b border-white/10 px-4 py-2 text-[12px] text-white/85">
+    <section className="rounded-[var(--radius-card)] border border-[var(--surface-border)] bg-[var(--surface-bg)] shadow-[var(--card-shadow)] backdrop-blur-[var(--surface-blur)]">
+      <p className="border-b border-[var(--divider)] px-4 py-2 text-[12px] text-[var(--text-secondary)]">
         24-hour regional forecast.
       </p>
       <div
-        className="grid divide-x divide-white/5"
+        className="grid divide-x divide-[var(--divider)]"
         style={{ gridTemplateColumns: `repeat(${slots.length}, minmax(0, 1fr))` }}
       >
         {slots.map((slot) => {
           const isFair = slot.forecast?.toLowerCase().includes('fair');
           return (
             <div key={slot.key} className="flex flex-col items-center gap-2 px-2 py-4 text-center">
-              <div className="text-xs font-medium text-white/85">{slot.label}</div>
+              <div className="text-xs font-medium text-[var(--text-secondary)]">{slot.label}</div>
               {isFair ? (
                 <SunIcon className="h-7 w-7 text-amber-300" />
               ) : (
-                <CloudIcon className="h-7 w-7 text-white/85" />
+                <CloudIcon className="h-7 w-7 text-[var(--text-secondary)]" />
               )}
-              <div className="text-xs leading-snug text-white/90">{slot.forecast}</div>
+              <div className="text-xs leading-snug text-[var(--text-primary)]">
+                {slot.forecast}
+              </div>
             </div>
           );
         })}
