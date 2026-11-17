@@ -19,11 +19,7 @@ export function MapTile() {
 
   return (
     <>
-      <TileShell
-        icon={<LocationIcon className="h-3.5 w-3.5" />}
-        title="Map"
-        className="col-span-2"
-      >
+      <TileShell icon={<LocationIcon className="h-3.5 w-3.5" />} title="Map" className="col-span-2">
         <div className="mb-3 flex items-center justify-between">
           <span className="text-xs text-[var(--text-tertiary)]">
             {locations.length} location{locations.length === 1 ? '' : 's'}

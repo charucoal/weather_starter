@@ -26,6 +26,7 @@ Browser (http://weather-starter.localhost:1355)
 ## Data flow (snapshot pattern)
 
 The app does **not** hit the external weather API on every page load:
+
 1. `POST /api/locations` saves coordinates, then immediately calls the weather provider once and persists the resulting snapshot.
 2. `GET /api/locations` reads only from `backend/weather.db`.
 3. `POST /api/locations/:id/refresh` is the only other time the external API is called, overwriting the stored snapshot.

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vite/
+backend/drizzle/
+backend/logs/
+backend/weather.db
+docs/.astro/
+docs/dist/
+package-lock.json

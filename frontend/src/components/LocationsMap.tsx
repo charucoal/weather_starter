@@ -18,7 +18,9 @@ interface LocationsMapProps {
 }
 
 function areaLabel(location: Location): string {
-  return location.weather.area || `${location.latitude.toFixed(3)}, ${location.longitude.toFixed(3)}`;
+  return (
+    location.weather.area || `${location.latitude.toFixed(3)}, ${location.longitude.toFixed(3)}`
+  );
 }
 
 function dotIcon(isSelected: boolean): L.DivIcon {
@@ -77,7 +79,12 @@ export function LocationsMap({
           icon={dotIcon(location.id === selectedId)}
           eventHandlers={{ click: () => onSelect(location.id) }}
         >
-          <Tooltip className="weather-marker-label" direction="top" offset={[0, -DOT_SIZE / 2]} permanent>
+          <Tooltip
+            className="weather-marker-label"
+            direction="top"
+            offset={[0, -DOT_SIZE / 2]}
+            permanent
+          >
             {areaLabel(location)} &middot; {formatTemperature(location.weather.temperature_c)}
           </Tooltip>
         </Marker>
